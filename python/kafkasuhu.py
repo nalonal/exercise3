@@ -2,7 +2,7 @@ from kafka import KafkaConsumer
 from json import loads
 from time import sleep
 consumer = KafkaConsumer(
-    'suhu_kota_indonesia',
+    'laporan_cuaca',
     bootstrap_servers=['localhost:9092'],
     auto_offset_reset='earliest',
     enable_auto_commit=True,
