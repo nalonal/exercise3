@@ -119,6 +119,8 @@ services:
   code-server:
     image: lscr.io/linuxserver/code-server:latest
     container_name: sp3_code-server
+    env_file:
+      - .env
     environment:
       - PUID=1000
       - PGID=1000
