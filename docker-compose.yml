@@ -100,13 +100,15 @@ services:
       - schema-registry
       - connect
     ports:
-      - "10002:8080"
+      - "${KAFKA_UI_PORT_PUBLISH}:8080"
+    env_file:
+      - .env
     environment:
-      KAFKA_CLUSTERS_0_NAME: "Small Project3"
+      KAFKA_CLUSTERS_0_NAME: ${KAFKA_UI_CLUSTER_NAME}
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'broker:29092'
       KAFKA_CLUSTERS_0_ZOOKEEPER: 'zookeeper:2181'
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: 'http://schema-registry:8081'
-      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: 'MyDataConnector'
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: ${KAFKA_UI_CLUSTER_CONNECT}
       KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: 'http://connect:8083'
     networks:
       - gcp
@@ -121,7 +123,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - PASSWORD=12345678 #optional
+      - PASSWORD=${VSC_ONLINE_PASSWORD} #optional
       - DEFAULT_WORKSPACE=/home #optional
       # - HASHED_PASSWORD= #optional
       # - SUDO_PASSWORD=password #optional
@@ -129,9 +131,9 @@ services:
       # - PROXY_DOMAIN=code-server.my.domain #optional
       
     volumes:
-      - ../exercise3:/home
+      - ../${VSC_ONLINE_DIRECTORY}:/home
     ports:
-      - 10001:8443
+      - ${VSC_PORT_PUBLISH}:8443
     restart: unless-stopped
     networks:
       - gcp
