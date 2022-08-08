@@ -38,5 +38,5 @@ def panggilsuhu():
 while True:
     # code goes here
     panggilsuhu()
-    time.sleep(10)
+    time.sleep(1800) #ambil data setiap 30 menit
 
