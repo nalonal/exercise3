@@ -5,7 +5,7 @@ cd exercise3<br>
 chmod u+x install.sh<br>
 ./install.sh<br><br>
 
-**Buka file .env**
+**Buka file .env**<br>
 nano .env<br>
 ganti IP_PUBLIC_EXTERNAL = "localhost" dengan IP Public anda<br>
 
