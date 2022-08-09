@@ -24,12 +24,14 @@ def getdata(namakota):
     ini_hasil['cuaca'] = output["weather"][0]["main"]
     ini_hasil['cuaca_deskripsi'] = output["weather"][0]["description"]
     ini_hasil['temperatur'] = output['main']['temp']
+    ini_hasil['temperatur_min'] = output['main']['temp_min']
+    ini_hasil['temperatur_max'] = output['main']['temp_max']
     ini_hasil["waktu"] = waktu
     #end sesuaikan
     return ini_hasil
 
 def panggilsuhu():
-    daftar_kota = ["Bali","Lombok","Labuan Bajo","Bogor","Bandung"]
+    daftar_kota = ["Bali","Lombok","Labuan Bajo","Medan","Bandung"]
     for kota in daftar_kota:
         update_suhu = getdata(kota)
         producer.send('laporan_cuaca', value=update_suhu)
