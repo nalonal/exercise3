@@ -1,6 +1,7 @@
 import requests,json
 from datetime import datetime
 import time
+from datetime import date
 
 from json import dumps
 from kafka import KafkaProducer
@@ -15,9 +16,13 @@ def getdata(namakota):
     ini_hasil = {}
     #mengambil waktu sekarang
     dt = datetime.now()
+    today = date.today()
     ts = datetime.timestamp(dt)
     st = datetime.fromtimestamp(ts)
-    waktu = st.isoformat(timespec='microseconds')
+    ini_timestamp = st.isoformat(timespec='microseconds')
+    #mengambil tanggal sekarang
+    ini_tanggal = today.strftime("%Y-%m-%d")
+    ini_waktu= dt.strftime("%H:%M:%S")
 
     #sesuaikan bagian ini
     ini_hasil['kota'] = namakota
@@ -26,7 +31,9 @@ def getdata(namakota):
     ini_hasil['temperatur'] = output['main']['temp']
     ini_hasil['temperatur_min'] = output['main']['temp_min']
     ini_hasil['temperatur_max'] = output['main']['temp_max']
-    ini_hasil["waktu"] = waktu
+    ini_hasil['date'] = ini_tanggal
+    ini_hasil['waktu'] = ini_waktu
+    ini_hasil["created"] = ini_timestamp
     #end sesuaikan
     return ini_hasil
 
